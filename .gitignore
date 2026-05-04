@@ -1,0 +1,69 @@
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub/
+.pub-cache/
+build/
+coverage/
+
+# API docs
+doc/api/
+
+# Obfuscation / symbolication
+app.*.map.json
+app.*.symbols
+
+# IDE - JetBrains / Android Studio
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# IDE - VS Code (optional; uncomment if you don't want workspace settings)
+# .vscode/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.log
+*.tmp
+
+# Misc
+*.class
+*.pyc
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# Android
+android/.gradle/
+android/app/debug/
+android/app/profile/
+android/app/release/
+
+# iOS / macOS generated Flutter files
+ios/Flutter/ephemeral/
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+ios/Flutter/.last_build_id
+macos/Flutter/ephemeral/
+macos/Flutter/GeneratedPluginRegistrant.swift
+macos/Flutter/Flutter-Generated.xcconfig
+
+# Windows generated Flutter files
+windows/flutter/ephemeral/
+
+# Linux generated Flutter files
+linux/flutter/ephemeral/
+
+# FVM (if used)
+.fvm/
+fvm_settings.json
