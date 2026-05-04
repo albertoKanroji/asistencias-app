@@ -1,17 +1,102 @@
-# registro_asistencia
+# Registro Asistencia
 
-Aplicacion Oficial de Terminales Portuarias del Pacifico para el registro de asistencia
+Aplicacion oficial de Terminales Portuarias del Pacifico para registro y monitoreo de movimientos de personal.
 
-## Getting Started
+## Stack
 
-This project is a starting point for a Flutter application.
+- Flutter (Dart)
+- GetX (routing, bindings, state)
+- Dio (cliente HTTP + interceptor de auth)
+- Shared Preferences (sesion local)
+- mobile_scanner (lectura QR)
 
-A few resources to get you started if this is your first Flutter project:
+## Funcionalidades Principales
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Login con backend y manejo de sesion.
+- Home con tabs:
+	- Escaner
+	- Monitoreo
+	- Contratistas
+	- Ajustes
+- Escaner:
+	- Escaneo continuo de QR (sin cerrar modal por cada lectura).
+	- Lista de personas escaneadas.
+	- Badge por persona:
+		- `Salida` (verde)
+		- `Regreso` (rojo)
+	- Si todos son `Regreso`, confirma entrada sin pedir motivo.
+	- Confirmacion final con envio al backend.
+- Monitoreo:
+	- Tabs: `Pendientes`, `Salidas`, `Entradas`.
+	- Filtros, limpiar filtros, paginacion/infinite scroll.
+	- Boton flotante de recarga por tab.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# asistencias-app
+## Estructura
+
+La app esta organizada por modulos en `lib/app/modules/`.
+
+- `auth`
+- `home`
+- `scanner`
+- `monitoring`
+- `contractors`
+- `settings`
+- `startup`
+
+Nucleo comun en `lib/app/core/`:
+
+- `network/` (client, interceptor, endpoints)
+- `services/`
+- `bindings/`
+- `config/`
+
+## Entornos (API)
+
+Configurado en `lib/app/core/config/api_config.dart` con `APP_ENV`:
+
+- `local` -> `http://localhost:7253/`
+- `prod` -> `https://cm-backend.tpp.com.mx`
+
+Ejemplos:
+
+```bash
+flutter run --dart-define=APP_ENV=local
+flutter run --dart-define=APP_ENV=prod
+```
+
+## Ejecutar Proyecto
+
+```bash
+flutter pub get
+flutter run --dart-define=APP_ENV=prod
+```
+
+## Build APK
+
+Produccion:
+
+```bash
+flutter build apk --release --dart-define=APP_ENV=prod
+```
+
+Local:
+
+```bash
+flutter build apk --release --dart-define=APP_ENV=local
+```
+
+Salida del APK:
+
+`build/app/outputs/flutter-apk/app-release.apk`
+
+## Comandos Utiles
+
+```bash
+flutter analyze
+flutter test
+```
+
+## Notas
+
+- El beep de escaneo en Android usa implementacion nativa para mejor compatibilidad en dispositivos Zebra TC15, con fallback a `SystemSound`.
+- El envio final del scanner espera respuesta del backend antes de mostrar exito.
